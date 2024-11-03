@@ -107,5 +107,37 @@ void testMultiplizierenVonZweiNegativenZahlen() {
     String actual = calc.readScreen();
 
     assertEquals(expected, actual);
-}
+}@Test
+    @DisplayName("soll beim benutzen von mehreren Operatoren, dass Zwischenergebnis anzeigen")
+    void testAnzeigenVomZwischenergebnis() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("x");
+
+
+        String expected = "11";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    @DisplayName(" testet ob das Zwischenergebnis auch nach der Clear Taste bestehen bleibt")
+    void testZwischenergebnisNachDerClearTaste() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressClearKey();
+        calc.pressEqualsKey();
+
+        String Expected = "10";
+        String Actual = calc.readScreen();
+        assertEquals(Expected, Actual);
+
+    }
 }
