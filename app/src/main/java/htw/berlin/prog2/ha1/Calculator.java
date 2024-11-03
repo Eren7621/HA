@@ -1,5 +1,6 @@
 package htw.berlin.prog2.ha1;
 
+
 /**
  * Eine Klasse, die das Verhalten des Online Taschenrechners imitiert, welcher auf
  * https://www.online-calculator.com/ aufgerufen werden kann (ohne die Memory-Funktionen)
@@ -8,13 +9,14 @@ package htw.berlin.prog2.ha1;
  */
 public class Calculator {
 
+    
     private String screen = "0";
-
+   
     private double latestValue;
 
     private String latestOperation = "";
 
-    /**
+     /**
      * @return den aktuellen Bildschirminhalt als String
      */
     public String readScreen() {
@@ -45,9 +47,12 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
+        if(screen.equals("0")){
+            latestValue = 0.0;
+            latestOperation = "";
+        }
+
         screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
     }
 
     /**
@@ -60,9 +65,11 @@ public class Calculator {
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
     public void pressBinaryOperationKey(String operation)  {
+        if (!latestOperation.isEmpty()) {
+            pressEqualsKey();}
         latestValue = Double.parseDouble(screen);
-        latestOperation = operation;
-    }
+        latestOperation = operation;}
+       
 
     /**
      * Empfängt den Wert einer gedrückten unären Operationstaste, also eine der drei Operationen
